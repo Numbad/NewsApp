@@ -1,4 +1,4 @@
-package com.numbad.numba.newsapp.ui.theme
+package com.numbad.numba.newsapp.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

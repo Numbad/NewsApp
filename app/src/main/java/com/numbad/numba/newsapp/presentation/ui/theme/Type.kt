@@ -1,4 +1,4 @@
-package com.numbad.numba.newsapp.ui.theme
+package com.numbad.numba.newsapp.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
