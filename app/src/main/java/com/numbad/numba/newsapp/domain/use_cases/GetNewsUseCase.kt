@@ -17,11 +17,11 @@ class GetNewsUseCase @Inject constructor(
         try {
             emit(Resource.Loading())
             val news = repository.getNews().toNews()
-            emit(Resource.Success(news))
+            emit(Resource.Success<News>(news))
         } catch (e: HttpException) {
-            emit(Resource.Error(e.localizedMessage ?: "Unexpected error occurred"))
+            emit(Resource.Error<News>(e.localizedMessage ?: "Unexpected error occurred"))
         } catch (e: IOException) {
-            emit(Resource.Error("Couldn't reach server. Check your connexion"))
+            emit(Resource.Error<News>("Couldn't reach server. Check your connexion"))
         }
     }
 }

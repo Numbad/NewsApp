@@ -30,11 +30,24 @@ class NewsListVM @Inject constructor(
                     _state.value = NewsListState(isLoading = true)
                 }
                 is Resource.Success -> {
-                    val dishes: MutableList<Pair<News.Story?, News.Video>> = mutableListOf()
-                    res.data?.stories?.zip(res.data.videos)?.map {
-                        dishes.add(it)
+                    val news: MutableList<Pair<News.Story?, News.Video?>> = mutableListOf()
+                    if(res.data != null){
+                        res.data.stories
+                            .zip(res.data.videos)
+                            .map { news.add(it) }
+                        val articleSize = res.data.stories.size
+                        val videoSize = res.data.videos.size
+                        if(articleSize > videoSize){
+                            res.data.stories.subList(videoSize - 1, articleSize -1).map {
+                                news.add(Pair(it, null))
+                            }
+                        } else if(videoSize > articleSize) {
+                            res.data.videos.subList(articleSize - 1, videoSize -1).map {
+                                news.add(Pair(null, it))
+                            }
+                        }
+                        _state.value = NewsListState(news = news)
                     }
-                    //_state.value = NewsListState(dishes = res.data ?: emptyList())
                 }
                 is Resource.Error -> {
                     _state.value = NewsListState(errorMessage = res.message ?: "An error occurred")

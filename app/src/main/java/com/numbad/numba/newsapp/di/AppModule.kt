@@ -18,7 +18,7 @@ import javax.inject.Singleton
 object AppModule {
     @Provides
     @Singleton
-    fun provideCookAppApi(): NewsApi {
+    fun provideNewsApi(): NewsApi {
         return Retrofit.Builder()
                 .baseUrl(Constant.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -28,7 +28,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideDishRepository(api: NewsApi): NewsRepository {
+    fun provideNewsApiRepository(api: NewsApi): NewsRepository {
         return NewsRepositoryImpl(api)
     }
 }

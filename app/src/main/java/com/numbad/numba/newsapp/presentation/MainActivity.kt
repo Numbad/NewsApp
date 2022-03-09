@@ -6,10 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.numbad.numba.newsapp.presentation.news_details.VideoDetailScreen
+import com.numbad.numba.newsapp.presentation.news_list.NewsListScreen
 import com.numbad.numba.newsapp.presentation.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,7 +27,27 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Screen.NewsListScreen.route
+                    ) {
+                        composable(
+                            route = Screen.NewsListScreen.route
+                        ) {
+                            NewsListScreen(navController)
+                        }
+                        composable(
+                            route = Screen.VideoDetailScreen.route + "/{videoUrl}"
+                        ) {
+                            VideoDetailScreen(savedStateHandle = navController.currentBackStackEntryAsState().value?.arguments)
+                        }
+                        composable(
+                            route = Screen.ArticleDetailScreen.route + "/{articleId}"
+                        ) {
+                           // ArticleDetailScreen()
+                        }
+                    }
                 }
             }
         }

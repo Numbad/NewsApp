@@ -2,7 +2,6 @@ package com.numbad.numba.newsapp.data.remote.dto
 
 import com.numbad.numba.newsapp.domain.model.News
 import java.io.Serializable
-import java.text.SimpleDateFormat
 import java.util.*
 
 data class NewsDto(
@@ -39,14 +38,14 @@ fun NewsDto.toNews(): News {
 }
 
 fun NewsDto.Story.toStory(): News.Story {
-    val timestamp: Long = 1633304782
+    val timestamp: Long = date.toLong()
     val timeD = Date(timestamp * 1000)
 
     return News.Story(author, timeD, id, image, sport.name, teaser, title)
 }
 
 fun NewsDto.Video.toVideo(): News.Video {
-    val timestamp: Long = 1633304782
+    val timestamp: Long = date.toLong()
     val timeD = Date(timestamp * 1000)
     return News.Video(timeD, id, sport.name, thumb, title, url, views)
 }
