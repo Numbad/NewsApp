@@ -20,7 +20,7 @@ import com.numbad.numba.newsapp.R
 import com.numbad.numba.newsapp.domain.model.News
 import com.numbad.numba.newsapp.presentation.news_list.NewsListTag
 
-@ExperimentalCoilApi
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun VideoListItem(
     video: News.Video,
