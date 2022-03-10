@@ -55,7 +55,7 @@ fun NewsListScreen(
             )
 
         },
-        content = { innerPadding ->
+        content = {
             Box(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(
                     modifier = Modifier

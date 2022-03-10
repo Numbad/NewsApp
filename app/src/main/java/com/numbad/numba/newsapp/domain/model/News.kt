@@ -8,7 +8,7 @@ val videos: List<Video>
 ) {
     data class Story(
         val author: String,
-        val date: Date,
+        val date: String,
         val id: Int,
         val image: String,
         val sport: String,
@@ -16,7 +16,7 @@ val videos: List<Video>
         val title: String
     )
     data class Video(
-        val date: Date,
+        val date: String,
         val id: Int,
         val sport: String,
         val thumb: String,

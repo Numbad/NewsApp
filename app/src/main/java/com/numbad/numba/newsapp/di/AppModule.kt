@@ -8,6 +8,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.realm.Realm
+import io.realm.RealmConfiguration
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -28,7 +30,20 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsApiRepository(api: NewsApi): NewsRepository {
-        return NewsRepositoryImpl(api)
+    fun provideNewsApiRepository(
+        api: NewsApi,
+        realm: Realm
+    ): NewsRepository {
+        return NewsRepositoryImpl(api, realm)
+    }
+
+    @Provides
+    @Singleton
+    fun providesRealmDatabase(): Realm {
+        val config = RealmConfiguration.Builder()
+            .name("myrealm.realm")
+            .schemaVersion(0)
+            .build()
+        return Realm.getInstance(config)
     }
 }

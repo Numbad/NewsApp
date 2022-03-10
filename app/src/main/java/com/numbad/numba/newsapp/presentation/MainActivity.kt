@@ -11,15 +11,19 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.numbad.numba.newsapp.presentation.news_details.VideoDetailScreen
+import com.numbad.numba.newsapp.presentation.news_details.article.ArticleDetailsScreen
+import com.numbad.numba.newsapp.presentation.news_details.video.VideoDetailScreen
 import com.numbad.numba.newsapp.presentation.news_list.NewsListScreen
 import com.numbad.numba.newsapp.presentation.ui.theme.NewsAppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import io.realm.Realm
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Realm.init(this)
+        val context = this
         setContent {
             NewsAppTheme {
                 Surface(
@@ -47,7 +51,7 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Screen.ArticleDetailScreen.route + "/{articleId}"
                         ) {
-                           // ArticleDetailScreen()
+                            ArticleDetailsScreen(navHostController = navController, context = context)
                         }
                     }
                 }
