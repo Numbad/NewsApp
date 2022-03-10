@@ -17,17 +17,6 @@ class NewsRepositoryImpl @Inject constructor(
     private val api: NewsApi,
     private val realm: Realm
 ): NewsRepository {
-    companion object {
-       // val config = RealmConfiguration.Builder(
-       //     schema = setOf(
-       //         BddNews::class,
-       //         BddNews_BddVideo::class,
-       //         BddNews_BddArticle::class
-       //     )
-       // ).build()
-       // val realm = Realm.open(config)
-    }
-
 
     override suspend fun getNews(): NewsDto {
         return api.getNews()
@@ -63,9 +52,6 @@ class NewsRepositoryImpl @Inject constructor(
             videoBdd
         })
         realm.commitTransaction()
-
-
-
         return newsBdd
     }
 

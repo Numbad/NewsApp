@@ -10,10 +10,14 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetArticleUseCase @Inject constructor(
+interface GetArticleUseCase {
+    operator fun invoke(id: Int): Flow<Resource<News.Story?>>
+}
+
+class GetArticleUseCaseImpl @Inject constructor(
     private val repository: NewsRepository
-) {
-    operator fun invoke(id: Int): Flow<Resource<News.Story?>> = flow {
+): GetArticleUseCase {
+    override operator fun invoke(id: Int): Flow<Resource<News.Story?>> = flow {
         try {
             emit(Resource.Loading())
             val article = repository.getFromBddArticle(id)?.toStory()

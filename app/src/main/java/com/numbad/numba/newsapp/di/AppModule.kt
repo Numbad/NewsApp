@@ -4,6 +4,10 @@ import com.numbad.numba.newsapp.common.Constant
 import com.numbad.numba.newsapp.data.remote.NewsApi
 import com.numbad.numba.newsapp.data.repository.NewsRepositoryImpl
 import com.numbad.numba.newsapp.domain.repository.NewsRepository
+import com.numbad.numba.newsapp.domain.use_cases.GetArticleUseCase
+import com.numbad.numba.newsapp.domain.use_cases.GetArticleUseCaseImpl
+import com.numbad.numba.newsapp.domain.use_cases.GetNewsUseCase
+import com.numbad.numba.newsapp.domain.use_cases.GetNewsUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -35,6 +39,22 @@ object AppModule {
         realm: Realm
     ): NewsRepository {
         return NewsRepositoryImpl(api, realm)
+    }
+
+    @Provides
+    @Singleton
+    fun provideArticleUseCase(
+        repo: NewsRepository
+    ): GetArticleUseCase {
+        return GetArticleUseCaseImpl(repo)
+    }
+
+@Provides
+    @Singleton
+    fun provideNewsUseCase(
+        repo: NewsRepository
+    ): GetNewsUseCase {
+        return GetNewsUseCaseImpl(repo)
     }
 
     @Provides

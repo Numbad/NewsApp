@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.numbad.numba.newsapp.common.Resource
 import com.numbad.numba.newsapp.domain.model.News
 import com.numbad.numba.newsapp.domain.use_cases.GetNewsUseCase
+import com.numbad.numba.newsapp.domain.use_cases.GetNewsUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
