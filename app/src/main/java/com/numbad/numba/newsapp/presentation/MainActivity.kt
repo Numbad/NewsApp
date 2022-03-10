@@ -22,7 +22,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NewsAppTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
@@ -40,7 +39,10 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Screen.VideoDetailScreen.route + "/{videoUrl}"
                         ) {
-                            VideoDetailScreen(savedStateHandle = navController.currentBackStackEntryAsState().value?.arguments)
+                            VideoDetailScreen(
+                                savedStateHandle = navController.currentBackStackEntryAsState().value?.arguments,
+                                navHostController = navController
+                            )
                         }
                         composable(
                             route = Screen.ArticleDetailScreen.route + "/{articleId}"

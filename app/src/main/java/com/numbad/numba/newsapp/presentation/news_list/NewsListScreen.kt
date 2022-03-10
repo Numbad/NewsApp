@@ -4,7 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.*
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,55 +34,12 @@ fun NewsListScreen(
     viewModel: NewsListVM = hiltViewModel()
 ) {
     val state = viewModel.state.value
-   /* Box(modifier = Modifier.fillMaxSize()) {
-        LazyColumn(modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 55.dp)) {
-
-            items(state.news) { (article, video) ->
-                if (video != null) {
-                    VideoListItem(
-                        video = video,
-                        onItemClick = {
-                            val encodedUrl = URLEncoder.encode(video.url, StandardCharsets.UTF_8.toString())
-                             navController.navigate(Screen.VideoDetailScreen.route + "/${encodedUrl}")
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(15.dp))
-                }
-                if (article != null) {
-                    ArticleListItem(article = article, onItemClick = {
-                        navController.navigate(Screen.ArticleDetailScreen.route + "/${article.id}")
-                    })
-                    Spacer(modifier = Modifier.height(15.dp))
-                }
-
-            }
-
-        }
-
-        /*TopAppBar(
-            title = { Text(text = "FEATURED", textAlign = TextAlign.Center) }
-        )*/
-        if(state.errorMessage.isNotBlank()) {
-            Text(
-                text = state.errorMessage,
-                color = MaterialTheme.colors.error,
-                textAlign = TextAlign.Center,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 20.dp)
-                    .align(Alignment.Center)
-            )
-        }
-        if(state.isLoading) {
-            LaunchScreen()
-        }
-    }*/
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text("Centered TopAppBar") },
+            if(!state.isLoading)
+            TopAppBar(
+
+                title = { Text(text="FEATURED", textAlign = TextAlign.Center) },
                 navigationIcon = {
                     IconButton(onClick = { /* doSomething() */ }) {
                         painterResource(id = R.drawable.back)
@@ -89,15 +50,17 @@ fun NewsListScreen(
                         painterResource(id = R.drawable.share)
                     }
                 },
-                modifier = Modifier.background(colorResource(id = R.color.primary))
+                backgroundColor = (colorResource(id = R.color.primary)),
+
             )
+
         },
         content = { innerPadding ->
             Box(modifier = Modifier.fillMaxSize()) {
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(top = 55.dp)
+                        .padding(top = 5.dp)
                 ) {
                     //val state = viewModel.state.value
                     items(state.news) { (article, video) ->

@@ -4,4 +4,5 @@ object Constant {
 
     const val BASE_URL = "https://extendsclass.com/"
     const val VIDEO_URL = "videoUrl"
+    const val ARTICLE_ID = "articleId"
 }
