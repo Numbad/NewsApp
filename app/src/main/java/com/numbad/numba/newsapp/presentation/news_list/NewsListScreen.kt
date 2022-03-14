@@ -37,22 +37,22 @@ fun NewsListScreen(
     Scaffold(
         topBar = {
             if(!state.isLoading)
-            TopAppBar(
+                TopAppBar(
 
-                title = { Text(text="FEATURED", textAlign = TextAlign.Center) },
-                navigationIcon = {
-                    IconButton(onClick = { /* doSomething() */ }) {
-                        painterResource(id = R.drawable.back)
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { /* doSomething() */ }) {
-                        painterResource(id = R.drawable.share)
-                    }
-                },
-                backgroundColor = (colorResource(id = R.color.primary)),
+                    title = { Text(text="FEATURED", textAlign = TextAlign.Center) },
+                    navigationIcon = {
+                        IconButton(onClick = { /* doSomething() */ }) {
+                            painterResource(id = R.drawable.back)
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = { /* doSomething() */ }) {
+                            painterResource(id = R.drawable.share)
+                        }
+                    },
+                    backgroundColor = (colorResource(id = R.color.primary)),
 
-            )
+                    )
 
         },
         content = {
@@ -64,26 +64,21 @@ fun NewsListScreen(
                 ) {
                     //val state = viewModel.state.value
                     items(state.news) { (article, video) ->
-                        if (video != null) {
-                            VideoListItem(
-                                video = video,
-                                onItemClick = {
-                                    val encodedUrl = URLEncoder.encode(
-                                        video.url,
-                                        StandardCharsets.UTF_8.toString()
-                                    )
-                                    navController.navigate(Screen.VideoDetailScreen.route + "/${encodedUrl}")
-                                }
-                            )
-                            Spacer(modifier = Modifier.height(15.dp))
-                        }
                         if (article != null) {
                             ArticleListItem(article = article, onItemClick = {
                                 navController.navigate(Screen.ArticleDetailScreen.route + "/${article.id}")
                             })
                             Spacer(modifier = Modifier.height(15.dp))
                         }
-
+                        if (video != null) {
+                            VideoListItem(
+                                video = video,
+                                onItemClick = {
+                                    navController.navigate(Screen.VideoDetailScreen.route + "/${video.id}")
+                                }
+                            )
+                            Spacer(modifier = Modifier.height(15.dp))
+                        }
                     }
                 }
             }
@@ -97,9 +92,9 @@ fun NewsListScreen(
                         .padding(horizontal = 20.dp)
                 )
             }
-            if(state.isLoading) {
-                LaunchScreen()
-            }
+            //if(state.isLoading) {
+            //    LaunchScreen(navHostController = navController)
+            //}
         }
     )
 }

@@ -83,7 +83,7 @@ fun ArticleDetailsScreen(
                                 .padding(12.dp),
                             contentAlignment = Alignment.BottomStart
                         ) {
-                            NewsListTag(article.sport)
+                           // NewsListTag(article.sport)
                         }
                     }
                     Column(
@@ -120,22 +120,22 @@ fun ArticleDetailsScreen(
                     }
                 }
 
-                    if (state.errorMessage.isNotBlank()) {
-                        Text(
-                            text = state.errorMessage,
-                            color = MaterialTheme.colors.error,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 20.dp)
-                                .align(Alignment.CenterHorizontally)
-                        )
-                    }
-                    if (state.isLoading) {
-                        CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-                    }
-
+                if (state.errorMessage.isNotBlank()) {
+                    Text(
+                        text = state.errorMessage,
+                        color = MaterialTheme.colors.error,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp)
+                            .align(Alignment.CenterHorizontally)
+                    )
                 }
+                if (state.isLoading) {
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+                }
+
+            }
 
 
         }

@@ -33,15 +33,20 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Screen.NewsListScreen.route
+                        startDestination = Screen.LaunchScreen.route
                     ) {
+                        composable(
+                            route = Screen.LaunchScreen.route
+                        ) {
+                            LaunchScreen(navController)
+                        }
                         composable(
                             route = Screen.NewsListScreen.route
                         ) {
                             NewsListScreen(navController)
                         }
                         composable(
-                            route = Screen.VideoDetailScreen.route + "/{videoUrl}"
+                            route = Screen.VideoDetailScreen.route + "/{videoId}"
                         ) {
                             VideoDetailScreen(
                                 savedStateHandle = navController.currentBackStackEntryAsState().value?.arguments,

@@ -1,8 +1,7 @@
 package com.numbad.numba.newsapp.presentation.news_list
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -16,23 +15,18 @@ import com.numbad.numba.newsapp.R
 
 @Composable
 fun NewsListTag(
-    tag: String
+    tag: String,
+    modifier: Modifier
 ) {
-    Box(
-        modifier = Modifier
-            .padding(10.dp)
-            .clip(RoundedCornerShape(5.dp))
 
-    ) {
         Text(
             text = tag,
             color = colorResource(id = R.color.white),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.body2,
-            modifier = Modifier
+            modifier = modifier
                 .background(colorResource(id = R.color.primary))
                 .padding(5.dp)
 
         )
-    }
 }

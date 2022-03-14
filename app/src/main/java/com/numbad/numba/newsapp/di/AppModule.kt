@@ -4,10 +4,7 @@ import com.numbad.numba.newsapp.common.Constant
 import com.numbad.numba.newsapp.data.remote.NewsApi
 import com.numbad.numba.newsapp.data.repository.NewsRepositoryImpl
 import com.numbad.numba.newsapp.domain.repository.NewsRepository
-import com.numbad.numba.newsapp.domain.use_cases.GetArticleUseCase
-import com.numbad.numba.newsapp.domain.use_cases.GetArticleUseCaseImpl
-import com.numbad.numba.newsapp.domain.use_cases.GetNewsUseCase
-import com.numbad.numba.newsapp.domain.use_cases.GetNewsUseCaseImpl
+import com.numbad.numba.newsapp.domain.use_cases.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,10 +23,10 @@ object AppModule {
     @Singleton
     fun provideNewsApi(): NewsApi {
         return Retrofit.Builder()
-                .baseUrl(Constant.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(NewsApi::class.java )
+            .baseUrl(Constant.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(NewsApi::class.java )
     }
 
     @Provides
@@ -49,7 +46,15 @@ object AppModule {
         return GetArticleUseCaseImpl(repo)
     }
 
-@Provides
+    @Provides
+    @Singleton
+    fun provideVideoUseCase(
+        repo: NewsRepository
+    ): GetVideoUseCase {
+        return GetVideoUseCaseImpl(repo)
+    }
+
+    @Provides
     @Singleton
     fun provideNewsUseCase(
         repo: NewsRepository

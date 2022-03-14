@@ -55,7 +55,11 @@ class NewsRepositoryImpl @Inject constructor(
         return newsBdd
     }
 
-    override suspend fun getFromBddArticle(id: Int): BddNews_BddArticle? {
+    override suspend fun getArticleFromBdd(id: Int): BddNews_BddArticle? {
         return realm.where<BddNews_BddArticle>().equalTo("id", id).findFirst()
+    }
+
+    override suspend fun getVideoFromBdd(id: Int): BddNews_BddVideo? {
+        return realm.where<BddNews_BddVideo>().equalTo("id", id).findFirst()
     }
 }

@@ -1,7 +1,5 @@
 package com.numbad.numba.newsapp.domain.model
 
-import java.util.*
-
 data class News(
 val stories: List<Story>,
 val videos: List<Video>

@@ -34,7 +34,7 @@ fun VideoListItem(
         Column {
             Box(
                 modifier = Modifier
-                .height(200.dp).clickable { onItemClick(video) }
+                    .height(200.dp).clickable { onItemClick(video) }
             ){
                 val painter  = rememberImagePainter(data = video.thumb)
 
@@ -59,7 +59,7 @@ fun VideoListItem(
                         .padding(12.dp),
                     contentAlignment = Alignment.BottomStart
                 ) {
-                    NewsListTag(video.sport)
+                   // NewsListTag(video.sport)
                 }
             }
             Column(modifier = Modifier
@@ -80,6 +80,6 @@ fun VideoListItem(
             }
 
         }
-        
+
     }
 }
